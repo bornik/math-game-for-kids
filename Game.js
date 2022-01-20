@@ -13,7 +13,7 @@ export function Game(props) {
     }
     return random;
   };
-  const [operand0, setOperand0] = useState(getRandom(10, type === '÷' ? 0 : undeined));
+  const [operand0, setOperand0] = useState(getRandom(10, type === '÷' ? 0 : undefined));
   const [operand1, setOperand1] = useState(getRandom(10));
   const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
@@ -64,7 +64,7 @@ export function Game(props) {
 
   const nextTask = () => {
     setCorrectness(null);
-    setOperand0(getRandom(10, type === '÷' ? 0 : undeined));
+    setOperand0(getRandom(10, type === '÷' ? 0 : undefined));
     setOperand1(getRandom(10));
     // while (operand0 === 0) {
     //   setOperand0(getRandom(10));
