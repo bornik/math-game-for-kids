@@ -1,0 +1,24 @@
+.correct {
+  border: solid 2px green;
+  animation: borderBlink 1s step-end infinite;
+}
+.incorrect {
+  border: solid 2px red;
+  animation: borderBlink 0.5s step-end infinite;
+}
+@keyframes borderBlink {
+  50% {
+    border-color: initial;
+    border-width: 1px;
+  }
+}
+.answers-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input[type=button], input[type=submit] {
+  margin: 5px;
+  min-width: 44px;
+  height: 44px;
+}
