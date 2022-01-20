@@ -1,3 +1,6 @@
-# af-react-sandbox-jth8u8
+*** Simple app to play number games
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/af-react-sandbox-jth8u8)
+Session is not stored for now
+Works in browser, doesn't need any back end
+
+Insperied by my son, who adors solve equations

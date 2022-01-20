@@ -12,9 +12,19 @@
     border-width: 1px;
   }
 }
-.answers-buttons {
+.answer-buttons-container {
   display: flex;
   flex-wrap: wrap;
+  /* align-items: flex-start; */
+  /* height: 200px; */
+  align-items: center;
+  justify-content: center; 
+}
+
+.answer-buttons-container > input {
+  align-items: flex-end;
+  flex: 1 0 calc(10% - 10px);
+  
 }
 
 input[type=button], input[type=submit] {

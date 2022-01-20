@@ -1,25 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import {Game} from './Game';
 import './style.css';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: 'React',
-    };
-  }
+const App = () => {
+  const [operation, setOperation] = useState('÷')
 
-  render() {
+  const handleOperationChange = (event) => {
+    setOperation(event.target.value)
+  }
+  
     return (
       <div>
-        <h1>Привіт, любей друже!</h1>
+        <h1>Привіт, любий друже!</h1>
         <h2>Хочеш погратися в математику?</h2>
-        <GameDevision />
+        <label for='operator'>Обери операції, які тобі довподоби:</label>&nbsp;
+        <select value={operation} onChange={handleOperationChange} id='operator'>
+          <option value='÷'>÷</option>
+          <option value='*'>*</option>
+          <option value='+'>+</option>
+          <option value='-'>-</option>
+        </select>
+        <Game type={operation}/>
       </div>
     );
-  }
+
 }
 
 render(<App />, document.getElementById('root'));

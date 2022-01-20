@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 export function Game(props) {
-  console.log( 'GameDevision' );
+  const { type } = props;
+  console.log('Game');
   const getRandom = (max = 10, but) => {
     const random = Math.floor(Math.random() * max);
     if (but !== undefined && random === but) {
-      return getRandom(max)
+      return getRandom(max);
     }
     if (random === 0) {
-      debugger
+      debugger;
     }
     return random;
   };
   const [multiplier0, setMultiplier0] = useState(getRandom(10, 0));
   const [multiplier1, setMultiplier1] = useState(getRandom(10));
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
   const [correctAnswersCounter, setCorrectAnswersCounter] = useState(0);
 
@@ -25,7 +26,7 @@ export function Game(props) {
     }
     setCorrectAnswersCounter(correctAnswersCounter + 1);
     const timeout = setTimeout(() => {
-      console.log("timout");
+      console.log('timout');
       nextTask();
     }, 1000);
 
@@ -42,7 +43,22 @@ export function Game(props) {
 
   const checkResult = (event) => {
     // console.log(event);
-    setCorrectness(multiplier1 === +result);
+    switch (type) {
+      case '-':
+      case '÷': {
+        setCorrectness(multiplier1 === +result);
+        break;
+      }
+      case '*': {
+        setCorrectness(multiplier0 * multiplier1 === +result);
+        break;
+      }
+      case '+': {
+        setCorrectness(multiplier0 + multiplier1 === +result);
+        break;
+      }
+      default:
+    }
     event.preventDefault();
   };
 
@@ -53,43 +69,51 @@ export function Game(props) {
     // while (multiplier0 === 0) {
     //   setMultiplier0(getRandom(10));
     // }
-    setResult("");
+    setResult('');
   };
 
   return (
     <>
-      <h3>Правильно відповів разів: {correctAnswersCounter}</h3>
-      <div>{`${multiplier0 * multiplier1} ÷ ${multiplier0}`}</div>
+      <h3>Кількість правильних відповідей: {correctAnswersCounter}</h3>
+      {type === '÷' && (
+        <div>{`${multiplier0 * multiplier1} ${type} ${multiplier0}`}</div>
+      )}
+      {(type === '*' || type === '+') && (
+        <div>{`${multiplier0} ${type} ${multiplier1}`}</div>
+      )}
+      {type === '-' && (
+        <div>{`${multiplier0 + multiplier1} ${type} ${multiplier0}`}</div>
+      )}
+      <br />
+      <button onClick={nextTask}>Інше завдання</button>
       <form onSubmit={checkResult}>
         <label htmlFor="result">Обери результат </label>
-        <input type="number" value={result} onChange={handleChange} type="text" id="result" /> 
+        <input
+          type="number"
+          value={result}
+          onChange={handleChange}
+          type="text"
+          id="result"
+        />
         &nbsp;
         <input
           type="submit"
           id="checkResult"
-          className={`${correctness && "correct"} ${
-            correctness === false && "incorrect"
+          className={`${correctness && 'correct'} ${
+            correctness === false && 'incorrect'
           }`}
           value="Перевірка"
         />
-        <div className="answers-buttons" onClick={handleChange}>
-          <input type="submit" value="1"/>
-          <input type="submit" value="2"/>
-          <input type="submit" value="3"/>
-          <input type="submit" value="4"/>
-          <input type="submit" value="5"/>
-          <input type="submit" value="6"/>
-          <input type="submit" value="7"/>
-          <input type="submit" value="8"/>
-          <input type="submit" value="9"/>
-          <input type="submit" value="0"/>
+        <div>Швидкі відповіді</div>
+        <div class="answer-buttons-container" onClick={handleChange}>
+          {[...Array(100).keys()].map((x, i) => (
+            <input type="submit" value={i} />
+          ))}
         </div>
       </form>
-      <button onClick={nextTask}>Нове завдання</button>
     </>
   );
 }
 
 // const App = <GameDevision />;
 // ReactDOM.render(App, document.getElementById("root"));
-
