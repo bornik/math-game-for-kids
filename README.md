@@ -1,6 +1,7 @@
-*** Simple app to play number games
+# Simple app to play number games: ÷ * + -
 
-Session is not stored for now
-Works in browser, doesn't need any back end
+Session is not stored for now.
+
+Works in browser, doesn't need any back end.
 
 Insperied by my son, who adors solve equations
