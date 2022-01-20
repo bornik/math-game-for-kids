@@ -13,8 +13,8 @@ export function Game(props) {
     }
     return random;
   };
-  const [multiplier0, setMultiplier0] = useState(getRandom(10, 0));
-  const [multiplier1, setMultiplier1] = useState(getRandom(10));
+  const [operand0, setOperand0] = useState(getRandom(10, type === '÷' ? 0 : undeined));
+  const [operand1, setOperand1] = useState(getRandom(10));
   const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
   const [correctAnswersCounter, setCorrectAnswersCounter] = useState(0);
@@ -33,8 +33,8 @@ export function Game(props) {
     return () => clearTimeout(timeout);
   }, [correctness]);
 
-  // while (multiplier0 === 0) {
-  //   setMultiplier0(getRandom(10));
+  // while (operand0 === 0) {
+  //   setOperand0(getRandom(10));
   // }
 
   const handleChange = (event) => {
@@ -46,15 +46,15 @@ export function Game(props) {
     switch (type) {
       case '-':
       case '÷': {
-        setCorrectness(multiplier1 === +result);
+        setCorrectness(operand1 === +result);
         break;
       }
       case '*': {
-        setCorrectness(multiplier0 * multiplier1 === +result);
+        setCorrectness(operand0 * operand1 === +result);
         break;
       }
       case '+': {
-        setCorrectness(multiplier0 + multiplier1 === +result);
+        setCorrectness(operand0 + operand1 === +result);
         break;
       }
       default:
@@ -64,25 +64,24 @@ export function Game(props) {
 
   const nextTask = () => {
     setCorrectness(null);
-    setMultiplier0(getRandom(10, 0));
-    setMultiplier1(getRandom(10));
-    // while (multiplier0 === 0) {
-    //   setMultiplier0(getRandom(10));
+    setOperand0(getRandom(10, type === '÷' ? 0 : undeined));
+    setOperand1(getRandom(10));
+    // while (operand0 === 0) {
+    //   setOperand0(getRandom(10));
     // }
     setResult('');
   };
 
-  return (
-    <>
+  return (<>
       <h3>Кількість правильних відповідей: {correctAnswersCounter}</h3>
       {type === '÷' && (
-        <div>{`${multiplier0 * multiplier1} ${type} ${multiplier0}`}</div>
+        <div>{`${operand0 * operand1} ${type} ${operand0}`}</div>
       )}
       {(type === '*' || type === '+') && (
-        <div>{`${multiplier0} ${type} ${multiplier1}`}</div>
+        <div>{`${operand0} ${type} ${operand1}`}</div>
       )}
       {type === '-' && (
-        <div>{`${multiplier0 + multiplier1} ${type} ${multiplier0}`}</div>
+        <div>{`${operand0 + operand1} ${type} ${operand0}`}</div>
       )}
       <br />
       <button onClick={nextTask}>Інше завдання</button>
