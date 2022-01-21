@@ -17,14 +17,16 @@ export function Game(props) {
   const [operand1, setOperand1] = useState(getRandom(10));
   const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
-  const [correctAnswersCounter, setCorrectAnswersCounter] = useState(0);
+  const [correctAnswersCounter, setCorrectAnswersCounter] = useState(window.localStorage.getItem('correctAnswersCounter') || 0);
 
   useEffect(() => {
     console.log({ correctness });
     if (!correctness) {
       return;
     }
-    setCorrectAnswersCounter(correctAnswersCounter + 1);
+    const incrementedCorrectAnswers = correctAnswersCounter + 1
+    setCorrectAnswersCounter(incrementedCorrectAnswers);
+    window.localStorage.setItem('correctAnswersCounter', incrementedCorrectAnswers)
     const timeout = setTimeout(() => {
       console.log('timout');
       nextTask();
