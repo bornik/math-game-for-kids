@@ -1,4 +1,5 @@
 import React from 'react';
+import { render } from 'react-dom'
 import {Landing} from './Landing';
 import './style.css';
 import ReactGA from 'react-ga';
