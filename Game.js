@@ -33,16 +33,11 @@ export function Game(props) {
     return () => clearTimeout(timeout);
   }, [correctness]);
 
-  // while (operand0 === 0) {
-  //   setOperand0(getRandom(10));
-  // }
-
   const handleChange = (event) => {
     setResult(event.target.value);
   };
 
   const checkResult = (event) => {
-    // console.log(event);
     switch (type) {
       case '-':
       case '÷': {
@@ -66,9 +61,6 @@ export function Game(props) {
     setCorrectness(null);
     setOperand0(getRandom(10, type === '÷' ? 0 : undefined));
     setOperand1(getRandom(10));
-    // while (operand0 === 0) {
-    //   setOperand0(getRandom(10));
-    // }
     setResult('');
   };
 
@@ -113,6 +105,3 @@ export function Game(props) {
     </>
   );
 }
-
-// const App = <GameDevision />;
-// ReactDOM.render(App, document.getElementById("root"));
