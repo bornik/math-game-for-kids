@@ -3,7 +3,9 @@ import { Game } from './Game';
 
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
-  const [userName, setUserName] = useState(window.localStorage.getItem('userName'));
+  const [userName, setUserName] = useState(
+    window.localStorage.getItem('userName')
+  );
   const [userNameConfirmed, setUserNameConfirmed] = useState(!!userName);
 
   const handleUserNameInput = (event) => {
@@ -15,19 +17,27 @@ export const Landing = () => {
   };
 
   const confirmUserName = () => {
-    window.localStorage.setItem('userName', userName)
+    window.localStorage.setItem('userName', userName);
     setUserNameConfirmed(!!userName);
+  };
+
+  const handleRenameClick = () => {
+    setUserNameConfirmed(false);
   };
 
   return (
     <div>
-      <h1>Привіт, {userName || 'любий друже'}!</h1>
+      <h1>
+        Привіт, {userName || 'любий друже'}
+        <button onClick={handleRenameClick}>✏️</button>!
+      </h1>
 
       {!userNameConfirmed ? (
         <>
           <form onSubmit={confirmUserName}>
             <label>
-              Як тебе звуть?<br/>
+              Як тебе звуть?
+              <br />
               <input value={userName} onChange={handleUserNameInput} />
             </label>
             <button onClick={confirmUserName}>OK</button>
