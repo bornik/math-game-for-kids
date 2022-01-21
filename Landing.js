@@ -3,8 +3,8 @@ import { Game } from './Game';
 
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
-  const [userName, setUserName] = useState('');
-  const [userNameConfirmed, setUserNameConfirmed] = useState(false);
+  const [userName, setUserName] = useState(window.localStorage.getItem('userName'));
+  const [userNameConfirmed, setUserNameConfirmed] = useState(!!userName);
 
   const handleUserNameInput = (event) => {
     setUserName(event.target.value);
@@ -14,7 +14,8 @@ export const Landing = () => {
     setOperation(event.target.value);
   };
 
-  const confirmUserName = (event) => {
+  const confirmUserName = () => {
+    window.localStorage.setItem('userName', userName)
     setUserNameConfirmed(!!userName);
   };
 
