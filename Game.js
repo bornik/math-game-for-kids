@@ -14,10 +14,10 @@ export function Game(props) {
     return random;
   };
   const [operand0, setOperand0] = useState(getRandom(10, type === '÷' ? 0 : undefined));
-  const [operand1, setOperand1] = useState(getRandom(10));
+  const [operand1, setOperand1] = useState(getRandom(10, 0));
   const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
-  const [correctAnswersCounter, setCorrectAnswersCounter] = useState(window.localStorage.getItem('correctAnswersCounter') || 0);
+  const [correctAnswersCounter, setCorrectAnswersCounter] = useState(+window.localStorage.getItem('correctAnswersCounter') || 0);
 
   useEffect(() => {
     console.log({ correctness });
@@ -60,10 +60,12 @@ export function Game(props) {
   };
 
   const nextTask = () => {
+    
     setCorrectness(null);
     setOperand0(getRandom(10, type === '÷' ? 0 : undefined));
-    setOperand1(getRandom(10));
+    setOperand1(getRandom(10, 0));
     setResult('');
+    console.log({operand1},{type}, {operand0})
   };
 
   return (<>
