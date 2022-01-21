@@ -1,26 +1,55 @@
 import React, { useState } from 'react';
-import {Game} from './Game';
+import { Game } from './Game';
 
 export const Landing = () => {
-  const [operation, setOperation] = useState('÷')
+  const [operation, setOperation] = useState('÷');
+  const [userName, setUserName] = useState('');
+  const [userNameConfirmed, setUserNameConfirmed] = useState(false);
+
+  const handleUserNameInput = (event) => {
+    setUserName(event.target.value);
+  };
 
   const handleOperationChange = (event) => {
-    setOperation(event.target.value)
-  }
-  
-    return (
-      <div>
-        <h1>Привіт, любий друже!</h1>
-        <h2>Хочеш погратися в математику?</h2>
-        <label htmlFor='operator'>Обери операції, які тобі довподоби:</label>&nbsp;
-        <select value={operation} onChange={handleOperationChange} id='operator'>
-          <option value='÷'>÷</option>
-          <option value='*'>*</option>
-          <option value='+'>+</option>
-          <option value='-'>-</option>
-        </select>
-        <Game type={operation}/>
-      </div>
-    );
+    setOperation(event.target.value);
+  };
 
-}
+  const confirmUserName = (event) => {
+    setUserNameConfirmed(!!userName);
+  };
+
+  return (
+    <div>
+      <h1>Привіт, {userName || 'любий друже'}!</h1>
+
+      {!userNameConfirmed ? (
+        <>
+          <form onSubmit={confirmUserName}>
+            <label>
+              Як тебе звуть?<br/>
+              <input value={userName} onChange={handleUserNameInput} />
+            </label>
+            <button onClick={confirmUserName}>OK</button>
+          </form>
+        </>
+      ) : (
+        <>
+          <h2>Хочеш погратися в математику?</h2>
+          <label htmlFor="operator">Обери операції, які тобі довподоби:</label>
+          &nbsp;
+          <select
+            value={operation}
+            onChange={handleOperationChange}
+            id="operator"
+          >
+            <option value="÷">÷</option>
+            <option value="*">*</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+          </select>
+          <Game type={operation} />
+        </>
+      )}
+    </div>
+  );
+};
