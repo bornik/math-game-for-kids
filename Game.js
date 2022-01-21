@@ -96,9 +96,9 @@ export function Game(props) {
           value="Перевірка"
         />
         <div>Швидкі відповіді</div>
-        <div class="answer-buttons-container" onClick={handleChange}>
+        <div className="answer-buttons-container" onClick={handleChange}>
           {[...Array(100).keys()].map((x, i) => (
-            <input type="submit" value={i} />
+            <input type="submit" key={i} value={i} />
           ))}
         </div>
       </form>
