@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "react": "^16",
-    "react-dom": "^16"
+    "prop-types": "^15.6.0",
+    "react": "17",
+    "react-dom": "17",
+    "react-ga": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
