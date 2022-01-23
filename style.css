@@ -44,3 +44,7 @@ input[type=button], input[type=submit] {
 .block{
   display: block;
 }
+
+.center {
+  text-align: center;
+}

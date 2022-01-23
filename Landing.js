@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Game } from './Game';
+import { version } from "./package.json";
 
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
@@ -31,7 +32,8 @@ export const Landing = () => {
   }
 
   return (
-    <div>
+    <>
+    <header className='center'>Територія гри. {version}</header>
       <h1>
         Привіт, {userName || 'любий друже'}
         {userNameConfirmed && <button className='button-icon' onClick={handleRenameClick}>✏️</button>}
@@ -53,6 +55,7 @@ export const Landing = () => {
       ) : (
         <>
           <h2>Хочеш погратися в математику?</h2>
+          
           <label htmlFor="operator">Обери операції, які тобі довподоби:</label>
           &nbsp;
           <select
@@ -68,6 +71,7 @@ export const Landing = () => {
           <Game type={operation} onScoreChange={handleScoreChange} />
         </>
       )}
-    </div>
+    <footer className='center'>ігри в математику© Версія: {version}</footer>
+    </>
   );
 };
