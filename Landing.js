@@ -29,7 +29,8 @@ export const Landing = () => {
     <div>
       <h1>
         Привіт, {userName || 'любий друже'}
-        <button onClick={handleRenameClick}>✏️</button>!
+        {userNameConfirmed && <button onClick={handleRenameClick}>✏️</button>}
+        !
       </h1>
 
       {!userNameConfirmed ? (
