@@ -14,24 +14,31 @@ export function Game(props) {
     }
     return random;
   };
-  const [operand0, setOperand0] = useState(getRandom(10, type === '÷' ? 0 : undefined));
+  const [operand0, setOperand0] = useState(
+    getRandom(10, type === '÷' ? 0 : undefined)
+  );
   const [operand1, setOperand1] = useState(getRandom(10, 0));
   const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
-  const [correctAnswersCounter, setCorrectAnswersCounter] = useState(+window.localStorage.getItem('correctAnswersCounter') || 0);
+  const [correctAnswersCounter, setCorrectAnswersCounter] = useState(
+    +window.localStorage.getItem('correctAnswersCounter') || 0
+  );
 
   useEffect(() => {
     console.log({ correctness });
     if (!correctness) {
       return;
     }
-    const incrementedCorrectAnswers = correctAnswersCounter + 1
+    const incrementedCorrectAnswers = correctAnswersCounter + 1;
     setCorrectAnswersCounter(incrementedCorrectAnswers);
-    window.localStorage.setItem('correctAnswersCounter', incrementedCorrectAnswers)
+    window.localStorage.setItem(
+      'correctAnswersCounter',
+      incrementedCorrectAnswers
+    );
     const timeout = setTimeout(() => {
       console.log('timout');
       nextTask();
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [correctness]);
@@ -61,30 +68,36 @@ export function Game(props) {
   };
 
   const nextTask = () => {
-    
     setCorrectness(null);
     setOperand0(getRandom(10, type === '÷' ? 0 : undefined));
     setOperand1(getRandom(10, 0));
     setResult('');
-    console.log({operand1},{type}, {operand0})
+    console.log({ operand1 }, { type }, { operand0 });
   };
 
-  return (<>
-      <Score className='block' scorePoints={correctAnswersCounter}/>
-      <h3>Кількість правильних відповідей: {correctAnswersCounter}</h3>
-      {type === '÷' && (
-        <div>{`${operand0 * operand1} ${type} ${operand0}`}</div>
-      )}
-      {(type === '*' || type === '+') && (
-        <div>{`${operand0} ${type} ${operand1}`}</div>
-      )}
-      {type === '-' && (
-        <div>{`${operand0 + operand1} ${type} ${operand0}`}</div>
-      )}
-      <br />
-      <button onClick={nextTask}>Інше завдання</button>
+  return (
+    <>
+      <h4>
+        <Score className="block" scorePoints={correctAnswersCounter} />
+      </h4>
+      <p>Кількість правильних відповідей: {correctAnswersCounter}</p>
+      <h3><span className={`${correctness && 'correct'} ${
+            correctness === false && 'incorrect'
+          }`}>
+        {type === '÷' && `${operand0 * operand1} ${type} ${operand0}`}
+        {(type === '*' || type === '+') && `${operand0} ${type} ${operand1}`}
+        {type === '-' && `${operand0 + operand1} ${type} ${operand0}`}
+      </span></h3>
+      
+      
       <form onSubmit={checkResult}>
-        <label htmlFor="result">Обери результат </label>
+      <div>Швидкі відповіді</div>
+        <div className="answer-buttons-container" onClick={handleChange}>
+          {[...Array(100).keys()].map((x, i) => (
+            <input type="submit" key={i} value={i} />
+          ))}
+        </div>
+        <label htmlFor="result">Якщо потрібно, можешь ввести результат тут </label>
         <input
           type="number"
           value={result}
@@ -96,18 +109,12 @@ export function Game(props) {
         <input
           type="submit"
           id="checkResult"
-          className={`${correctness && 'correct'} ${
-            correctness === false && 'incorrect'
-          }`}
+          
           value="Перевірка"
         />
-        <div>Швидкі відповіді</div>
-        <div className="answer-buttons-container" onClick={handleChange}>
-          {[...Array(100).keys()].map((x, i) => (
-            <input type="submit" key={i} value={i} />
-          ))}
-        </div>
+        
       </form>
+      <button className='block' onClick={nextTask}>Інше завдання</button>
     </>
   );
 }
