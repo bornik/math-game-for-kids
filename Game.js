@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Score } from './score/Score';
 
 export function Game(props) {
   const { type } = props;
@@ -69,6 +70,7 @@ export function Game(props) {
   };
 
   return (<>
+      <Score className='block' scorePoints={correctAnswersCounter}/>
       <h3>Кількість правильних відповідей: {correctAnswersCounter}</h3>
       {type === '÷' && (
         <div>{`${operand0 * operand1} ${type} ${operand0}`}</div>

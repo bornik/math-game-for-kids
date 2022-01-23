@@ -32,3 +32,17 @@ input[type=button], input[type=submit] {
   min-width: 44px;
   height: 44px;
 }
+
+.button-icon {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button-icon:hover {
+  filter: brightness(85%);
+}
+
+.block{
+  display: block;
+}

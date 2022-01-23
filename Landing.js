@@ -3,9 +3,10 @@ import { Game } from './Game';
 
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
-  const [userName, setUserName] = useState(
-    window.localStorage.getItem('userName')
-  );
+  const [userName, setUserName] = useState(window.localStorage.getItem('userName'));
+  // const [score, setScore] = useState(
+  //   window.localStorage.getItem('userName')
+  // );
   const [userNameConfirmed, setUserNameConfirmed] = useState(!!userName);
 
   const handleUserNameInput = (event) => {
@@ -25,12 +26,17 @@ export const Landing = () => {
     setUserNameConfirmed(false);
   };
 
+  const handleScoreChange = () => {
+
+  }
+
   return (
     <div>
       <h1>
         Привіт, {userName || 'любий друже'}
-        {userNameConfirmed && <button onClick={handleRenameClick}>✏️</button>}
+        {userNameConfirmed && <button className='button-icon' onClick={handleRenameClick}>✏️</button>}
         !
+        
       </h1>
 
       {!userNameConfirmed ? (
@@ -59,7 +65,7 @@ export const Landing = () => {
             <option value="+">+</option>
             <option value="-">-</option>
           </select>
-          <Game type={operation} />
+          <Game type={operation} onScoreChange={handleScoreChange} />
         </>
       )}
     </div>
