@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Game } from '../game/game';
-import { version } from "./package.json";
+import { version } from "../package.json";
 import './landing.scss';
 
 export const Landing = () => {
