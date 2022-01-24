@@ -4,8 +4,8 @@ import {Landing} from './landing/landing';
 import './style.css';
 import ReactGA from 'react-ga';
 
-ReactGA.initialize('G-9N289HG8YQ');
-ReactGA.pageview(window.location.pathname + window.location.search);
+//ReactGA.initialize('G-9N289HG8YQ');
+//ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
   return <Landing/>

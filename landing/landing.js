@@ -6,9 +6,7 @@ import './landing.scss';
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
   const [userName, setUserName] = useState(window.localStorage.getItem('userName'));
-  // const [score, setScore] = useState(
-  //   window.localStorage.getItem('userName')
-  // );
+
   const [userNameConfirmed, setUserNameConfirmed] = useState(!!userName);
 
   const handleUserNameInput = (event) => {
@@ -34,7 +32,7 @@ export const Landing = () => {
 
   return (
     <>
-    <header className='center'>Територія гри. {version}</header>
+    <header className='center'>ігри в математику v{version}</header>
       <h1>
         Привіт, {userName || 'любий друже'}
         {userNameConfirmed && <button className='button-icon' onClick={handleRenameClick}>✏️</button>}

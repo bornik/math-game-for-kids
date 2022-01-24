@@ -115,6 +115,11 @@ export function Game(props) {
         
       </form>
       <button className='block' onClick={nextTask}>Інше завдання</button>
+      <h3>Якщо тобі цікаво, можеш поразглядати Таблицю Піфагора</h3>
+      <p>З нею простіше запам'ятати множення</p>
+      <a href='https://skysmart.ru/articles/mathematic/tablica-umnozheniya'>
+      <img src='https://bandaumnikov.ru/media/blog/kak-uchit-tablicu-umnojeniya/pifagor-table.jpg'/>
+      </a>
     </>
   );
 }
