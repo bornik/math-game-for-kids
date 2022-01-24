@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Score } from './score/Score';
+import { Score } from './score/score';
 
 export function Game(props) {
   const { type } = props;

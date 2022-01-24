@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Game } from './Game';
+import { Game } from '../game/game';
 import { version } from "./package.json";
+import './landing.scss';
 
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
