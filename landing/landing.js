@@ -3,10 +3,21 @@ import { Game } from '../game/game';
 import { version } from "../package.json";
 import './landing.scss';
 
+
+const setBg = () => {
+  const randomColor = Math.floor(Math.random()*16777215).toString(16);
+  // document.body.header.style.backgroundColor = "#" + randomColor;
+  // color.innerHTML = "#" + randomColor;
+}
+
+// genNew.addEventListener("click", setBg);
+
+
 export const Landing = () => {
   const [operation, setOperation] = useState('÷');
   const [userName, setUserName] = useState(window.localStorage.getItem('userName'));
 
+  setBg();
   const [userNameConfirmed, setUserNameConfirmed] = useState(!!userName);
 
   const handleUserNameInput = (event) => {
