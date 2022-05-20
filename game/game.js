@@ -3,11 +3,15 @@ import { Score } from '../score/score';
 
 export function Game(props) {
   const { type } = props;
+  const {inputNumbers} = props
   console.log('Game');
-  const getRandom = (max = 10, but) => {
+  const getRandom = (max = 10, but, inputNumbers) => {
     const random = Math.floor(Math.random() * max);
+    if (inputNumbers && !inputNumbers.includes(random)) {
+      return getRandom(max, but, inputNumbers);
+    }
     if (but !== undefined && random === but) {
-      return getRandom(max);
+      return getRandom(max, but);
     }
     if (random === 0) {
       debugger;
@@ -15,9 +19,9 @@ export function Game(props) {
     return random;
   };
   const [operand0, setOperand0] = useState(
-    getRandom(10, type === '÷' ? 0 : undefined)
+    getRandom(10, type === '÷' ? 0 : undefined, inputNumbers)
   );
-  const [operand1, setOperand1] = useState(getRandom(10, 0));
+  const [operand1, setOperand1] = useState(getRandom(10, 0, inputNumbers));
   const [result, setResult] = useState('');
   const [correctness, setCorrectness] = useState(null);
   const [correctAnswersCounter, setCorrectAnswersCounter] = useState(
@@ -69,8 +73,8 @@ export function Game(props) {
 
   const nextTask = () => {
     setCorrectness(null);
-    setOperand0(getRandom(10, type === '÷' ? 0 : undefined));
-    setOperand1(getRandom(10, 0));
+    setOperand0(getRandom(10, type === '÷' ? 0 : undefined, inputNumbers));
+    setOperand1(getRandom(10, 0, inputNumbers));
     setResult('');
     console.log({ operand1 }, { type }, { operand0 });
   };
